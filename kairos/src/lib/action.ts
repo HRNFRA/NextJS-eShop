@@ -5,7 +5,7 @@ import { prisma } from "@/lib/db/prisma"
 
 
 
-export default async function addProduct(formData: FormData) {
+export async function addProduct(formData: FormData) {
     const name = formData.get('name')?.toString()
     const description = formData.get('description')?.toString()
     const imageUrl = formData.get('imageUrl')?.toString()

@@ -1,6 +1,5 @@
-'use client'
-
-import addProduct from "@/lib/action"
+import FormSubmitButton from "@/components/FormSubmitButton"
+import { addProduct } from "@/lib/action"
 
 
 export default function AddProductPage() {
@@ -40,12 +39,12 @@ export default function AddProductPage() {
                     className="input input-bordered mb-3 w-full"
                 />
 
-                <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
+                <FormSubmitButton
+                    className="btn-primary btn-block"
                 >
                     Add Product
-                </button>
+                </FormSubmitButton>
+                
             </form>
         </div>
     )
