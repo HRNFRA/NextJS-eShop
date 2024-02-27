@@ -1,5 +1,5 @@
 import FormSubmitButton from "@/components/FormSubmitButton"
-import { addProduct } from "@/lib/action"
+import { addProduct } from "@/lib/product"
 
 
 export default function AddProductPage() {
