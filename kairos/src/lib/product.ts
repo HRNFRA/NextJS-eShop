@@ -44,16 +44,27 @@ export async function incrementProductQuantity(productId: string) {
     const articleInCart = cart.items.find(item => item.productId === productId)
 
     if (articleInCart) {
-        await prisma.cartItem.update({
-            where: { id: articleInCart.id },
-            data: { quantity: { increment: 1 } }
+        await prisma.cart.update({
+            where: { id: cart.id },
+            data: {
+                items: {
+                    update: {
+                        where: { id: articleInCart.id },
+                        data: { quantity: { increment: 1 } }
+                    }
+                }
+            }
         })
     } else {
-        await prisma.cartItem.create({
+        await prisma.cart.update({
+            where: { id: cart.id },
             data: {
-                cartId: cart.id,
-                productId: productId,
-                quantity: 1
+                items: {
+                    create: {
+                        productId: productId,
+                        quantity: 1
+                    }
+                }
             }
         })
     }
@@ -75,23 +86,36 @@ export async function setProductQuantity(productId: string, quantity: number) {
 
     if (quantity === 0) {
         if (articleInCart) {
-            await prisma.cartItem.delete({
-                where: { id: articleInCart.id }
+            await prisma.cart.update({
+                where: { id: cart.id },
+                data: { items: { delete: { id: articleInCart.id } } }
             })
         }
     } else {
         if (articleInCart) {
-            await prisma.cartItem.update({
-                where: { id: articleInCart.id },
-                data: { quantity: quantity }
+            await prisma.cart.update({
+                where: { id: cart.id },
+                data: {
+                    items: {
+                        update: {
+                            where: { id: articleInCart.id },
+                            data: { quantity: quantity }
+                        }
+                    }
+                }
             })
         } else {
-            await prisma.cartItem.create({
+            await prisma.cart.update({
+                where: { id: cart.id },
                 data: {
-                    cartId: cart.id,
-                    productId: productId,
-                    quantity: quantity
+                    items: {
+                        create: {
+                            productId: productId,
+                            quantity: quantity
+                        }
+                    }
                 }
+            
             })
         }
     }

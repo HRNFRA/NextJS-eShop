@@ -4,7 +4,7 @@ import { formatPrice } from "@/lib/format"
 import { setProductQuantity } from "@/lib/product"
 
 export const metadata = {
-    title: "Kairos | Shopping Cart",
+    title: "FrogWatch | Shopping Cart",
 }
 
 export default async function CartPage() {
@@ -12,7 +12,7 @@ export default async function CartPage() {
     const cart = await getCart()
     
     return (
-        <div>
+        <div className="sm:min-h-[680px]">
             <h1 className="mb-6 text-3xl font-bold">Shopping Cart</h1>
             {cart?.items.map(cartItem => (
                 <CartEntry cartItem={cartItem} key={cartItem.id} setProductQuantity={setProductQuantity}/>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import logo from "@/assets/KAIROS.png"
+import logo from "@/assets/pepewatch.png"
 import { searchProducts } from "@/lib/product";
 import ShoppingCartButton from "./ShoppingCartButton";
 import { getCart } from "@/lib/cart";
@@ -18,7 +18,8 @@ export default async function NavBar() {
             <div className="navbar max-w-7xl m-auto flex-col sm:flex-row gap-2">
                 <div className="flex-1">
                     <Link href="/" className="btn btn-ghost">
-                        <Image src={logo} alt="Kairos" height={40} width={40}/>
+                        <Image src={logo} alt="FrogWatch" height={40} width={40}/>
+                        <h1 className="text-2xl font-bold">FrogWatch</h1>
                     </Link>
                 </div>
                 <div className="flex-none gap-2">

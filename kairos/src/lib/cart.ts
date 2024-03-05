@@ -108,12 +108,18 @@ export async function mergeAnonCartIntoUserCart(userId: string) {
                 where: { cartId: userCart.id }
             })
 
-            await tx.cartItem.createMany({
-                data: mergedCartItems.map(item => ({
-                    cartId: userCart.id,
-                    productId: item.productId,
-                    quantity: item.quantity
-                }))
+            await tx.cart.update({
+                where: { id: userCart.id },
+                data: {
+                    items: {
+                        createMany: {
+                            data: mergedCartItems.map(item => ({
+                                productId: item.productId,
+                                quantity: item.quantity
+                            }))
+                        }
+                    }
+                }
             })
         } else {
             await tx.cart.create({
@@ -151,3 +157,5 @@ function mergeCartItems(...cartIems: CartItem[][]) {
         return acc
     }, [] as CartItem[])
 }
+
+//TODO: SET A WAY TO DELETE LONG TIME NOT UPDATED LOCAL CARTS (VERCEL CRON JOB?)

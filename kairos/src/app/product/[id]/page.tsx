@@ -21,7 +21,7 @@ const getProduct = cache(async (id: string) => {
 export async function generateMetadata({ params: {id}}: ProductsPageProps): Promise<Metadata> {
     const product = await getProduct(id)
     return {
-        title: "Kairos | " + product.name,
+        title: "FrogWatch | " + product.name,
         description: product.description,
         openGraph: {
             images: [{ url : product.imageUrl}]

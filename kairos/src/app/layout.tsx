@@ -8,8 +8,8 @@ import SessionProvider from "@/app/SessionProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Kairos",
-  description: "We value your time",
+  title: "FrogWatch",
+  description: "Your time to the moon !",
 };
 
 export default function RootLayout({

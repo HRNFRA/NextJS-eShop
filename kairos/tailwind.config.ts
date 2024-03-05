@@ -12,14 +12,14 @@ const config: Config = {
     themes: [
       {
         mytheme: {
-        "primary": "#00b8ff",
+        "primary": "#588E3A",
         "secondary": "#00e0ff",
         "accent": "#e55b00",
         "neutral": "#1d1e13",
         "base-100": "#fcfcfc",                
         "info": "#008bff",
         "success": "#00b958",                
-        "warning": "#eca900",
+        "warning": "#E26D5C",
         "error": "#ff71a4",
         body: {
           "background-color" : "#e3e6e6"

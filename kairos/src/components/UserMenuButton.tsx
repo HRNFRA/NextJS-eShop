@@ -3,7 +3,7 @@
 import { Session } from "next-auth";
 import Image from "next/image";
 import { MdArrowDropDownCircle } from "react-icons/md";
-import logo from "@/assets/KAIROS.png"
+import logo from "@/assets/pepewatch.png"
 import { signIn, signOut } from "next-auth/react";
 
 interface UserMenuButtonProps {

@@ -5,6 +5,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 import { NextAuthOptions } from "next-auth"
 import { Adapter } from "next-auth/adapters"
 import NextAuth from "next-auth/next"
+import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 
 export const authOptions: NextAuthOptions = {
@@ -14,6 +15,17 @@ export const authOptions: NextAuthOptions = {
             clientId: env.GOOGLE_CLIENT_ID,
             clientSecret: env.GOOGLE_CLIENT_SECRET,
         }),
+        // CredentialsProvider({
+        //     name: "credentials",
+        //     credentials: {
+        //         username: {label: "Username", type: "text", placeholder: "username"},
+        //         password: {label: "Password", type: "password", placeholder: "password"}
+        //     },
+
+        //     async authorize(credentials) {
+        //         return null
+        //     }
+        // })
     ],
     callbacks: {
         session({session, user}) {
