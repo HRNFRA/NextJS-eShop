@@ -5,6 +5,7 @@ import Image from "next/image";
 import { MdArrowDropDownCircle } from "react-icons/md";
 import logo from "@/assets/pepewatch.png"
 import { signIn, signOut } from "next-auth/react";
+import Link from "next/link";
 
 interface UserMenuButtonProps {
     session: Session | null,
@@ -38,8 +39,10 @@ export default function UserMenuButton({ session }: UserMenuButtonProps) {
                     <li>
                         {user ? (
                             <button onClick={() => signOut({callbackUrl: "/"})}>Sign Out</button>
-                        ) : (
-                            <button onClick={() => signIn()}>Sign In</button>
+                        ) : (<>
+                            <button>Log In</button>
+                            <button>Sign Up</button>
+                            </>
                         )}
                     </li>
                 </ul>

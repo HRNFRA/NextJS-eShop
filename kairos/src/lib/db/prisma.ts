@@ -6,6 +6,7 @@ const globalForPrisma = globalThis as unknown as {
 
 const prismaBase = globalForPrisma.prisma ?? new PrismaClient()
 
+// Add a hook to update the `updatedAt` field on the cart when it is updated
 export const prisma = prismaBase.$extends({
     query: {
         cart: {

@@ -7,6 +7,7 @@ import { Adapter } from "next-auth/adapters"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
+import bcrypt from "bcrypt"
 
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
@@ -15,17 +16,41 @@ export const authOptions: NextAuthOptions = {
             clientId: env.GOOGLE_CLIENT_ID,
             clientSecret: env.GOOGLE_CLIENT_SECRET,
         }),
-        // CredentialsProvider({
-        //     name: "credentials",
-        //     credentials: {
-        //         username: {label: "Username", type: "text", placeholder: "username"},
-        //         password: {label: "Password", type: "password", placeholder: "password"}
-        //     },
+        CredentialsProvider({
+            name: "credentials",
+            credentials: {
+                email: {},
+                password: {},
+            },
+            async authorize(credentials) {
+                
+                if (!credentials) {
+                    throw new Error("No credentials provided")
+                }
 
-        //     async authorize(credentials) {
-        //         return null
-        //     }
-        // })
+                if (!credentials.email || !credentials.password) {
+                    throw new Error("Email and password are required")
+                }
+
+                const user = await prisma.user.findUnique({
+                    where: {
+                        email: credentials?.email
+                    }
+                })
+
+                if (!user || !user?.password) {
+                    throw new Error("No user found")
+                }
+
+                const passwordMatch = await bcrypt.compare(credentials.password, user.password)
+
+                if (!passwordMatch) {
+                    throw new Error("Incorrect credentials")
+                }
+                
+                return user
+            }
+        })
     ],
     callbacks: {
         session({session, user}) {
