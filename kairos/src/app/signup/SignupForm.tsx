@@ -1,11 +1,9 @@
 'use client'
 
-import { FormEvent, useState } from "react"
 import FormSubmitButton from "@/components/FormSubmitButton"
-import { redirect } from "next/navigation"
+import { useState, FormEvent } from "react"
 
-export default function SignUpPage() {
-    
+export default function SignupForm() {
     const [inputClass, setInputClass] = useState('input input-bordered input-secondary mb-3')
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -20,13 +18,11 @@ export default function SignUpPage() {
             })
         })
         console.log({response})
-        
-        redirect("/")
     }
 
     
     return (
-        <main className="h-screen w-screen flex justify-center items-center">
+        // <main className="h-screen w-screen flex justify-center items-center">
             <div className="flex flex-col items-center justify-items-center">
                 <h1 className="mb-3">Sign Up</h1>
                 <form
@@ -62,6 +58,6 @@ export default function SignUpPage() {
 
                 </form>
             </div>
-        </main>
+        // </main>
     )
 }

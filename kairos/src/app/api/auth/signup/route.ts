@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt"
 import { prisma } from "@/lib/db/prisma"
 import { NextResponse } from "next/server";
-// import { redirect } from "next/navigation";
+
 
 export async function POST(request: Request) {
 
@@ -26,6 +26,7 @@ export async function POST(request: Request) {
             password: passwordHashed
         }
     })
+
 
     return NextResponse.json(user)
 }

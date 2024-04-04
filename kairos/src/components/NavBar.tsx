@@ -19,7 +19,7 @@ export default async function NavBar() {
                 <div className="flex-1">
                     <Link href="/" className="btn btn-ghost">
                         <Image src={logo} alt="FrogWatch" height={40} width={40}/>
-                        <h1 className="text-2xl font-bold">FrogWatch</h1>
+                        <h1 className="text-2xl font-bold">Pepe Watch</h1>
                     </Link>
                 </div>
                 <div className="flex-none gap-2">

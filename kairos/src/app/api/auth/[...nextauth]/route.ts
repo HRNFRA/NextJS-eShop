@@ -23,7 +23,7 @@ export const authOptions: NextAuthOptions = {
                 password: {},
             },
             async authorize(credentials) {
-                
+
                 if (!credentials) {
                     throw new Error("No credentials provided")
                 }
@@ -47,20 +47,38 @@ export const authOptions: NextAuthOptions = {
                 if (!passwordMatch) {
                     throw new Error("Incorrect credentials")
                 }
-                
+                console.log("test")
+                console.log(user)
                 return user
             }
         })
     ],
+    secret: env.NEXTAUTH_SECRET,
+    session: {
+        strategy: "jwt",
+    },
     callbacks: {
-        session({session, user}) {
-            session.user.id = user.id
+        session({session, token}) {
+            console.log("test1")
+            if (token) {
+                session.user = session.user || {}
+                if (token.sub) {
+                    session.user.id = token.sub
+                }
+                session.user.name = token.email
+            }
+            console.log(token, session)
             return session
         },
     },
+    pages: {
+        signIn: "/login",
+    },
     events: {
         async signIn({user}) {
-            await mergeAnonCartIntoUserCart(user.id)
+            if (user) {
+                await mergeAnonCartIntoUserCart(user.id)
+            }
         }
     }
 }

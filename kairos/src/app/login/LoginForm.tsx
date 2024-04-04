@@ -1,13 +1,14 @@
 'use client'
 
-import { FormEvent, useState } from "react"
 import FormSubmitButton from "@/components/FormSubmitButton"
-import { redirect } from "next/navigation"
 import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useState, FormEvent } from "react"
 
-export default function LoginPage() {
+export default function LoginForm() {
 
-    // const [inputClass, setInputClass] = useState('input input-bordered input-secondary mb-3')
+    const router = useRouter()
+
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const login = async (e: FormEvent<HTMLFormElement>) => {
@@ -18,17 +19,18 @@ export default function LoginPage() {
             password: formData.get("password"),
             redirect: false,
         })
-        
-        console.log({response})
-        
-        redirect("/")
+        if (!response?.error) {
+            router.push("/")
+            router.refresh()
+        }
     }
 
     return (
-        <main className="h-screen w-screen flex justify-center items-center">
+        // <div className="h-full w-full flex justify-center items-center border border-red-600">
             <div className="flex flex-col items-center justify-items-center">
                 <h1 className="mb-3">Login Page</h1>
                     <form
+                    onSubmit={login}
                     className="flex flex-col items-center justify-items-center"
                     >
                         <input
@@ -52,6 +54,6 @@ export default function LoginPage() {
                         >Let's Go !</FormSubmitButton>
                     </form>
             </div>
-        </main>
+        // </div>
     )
 }
