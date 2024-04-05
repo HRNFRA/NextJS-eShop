@@ -9,7 +9,7 @@ export default async function SignUpPage() {
     const session = await getServerSession()
     
     if (session) {
-        redirect("/dashboard")
+        redirect("/")
     }
 
     return (

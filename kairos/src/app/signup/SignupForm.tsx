@@ -2,8 +2,12 @@
 
 import FormSubmitButton from "@/components/FormSubmitButton"
 import { useState, FormEvent } from "react"
+import { useRouter } from "next/navigation"
 
 export default function SignupForm() {
+
+    const router = useRouter()
+
     const [inputClass, setInputClass] = useState('input input-bordered input-secondary mb-3')
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -17,7 +21,10 @@ export default function SignupForm() {
                 password: formData.get("password")
             })
         })
-        console.log({response})
+        if (response?.ok) {
+            router.push("/login")
+            router.refresh()
+        }
     }
 
     
