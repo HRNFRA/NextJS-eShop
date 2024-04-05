@@ -159,3 +159,12 @@ function mergeCartItems(...cartIems: CartItem[][]) {
 }
 
 //TODO: SET A WAY TO DELETE LONG TIME NOT UPDATED LOCAL CARTS (VERCEL CRON JOB?)
+
+export async function emptyCart(cartToEmpty: string) {
+    const cartId = cartToEmpty
+    if (cartId) {
+        await prisma.cartItem.deleteMany({
+            where: { cartId: cartId }
+        });
+    }
+}
