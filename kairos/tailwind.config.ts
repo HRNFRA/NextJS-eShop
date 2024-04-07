@@ -1,4 +1,3 @@
-import daisyui from "daisyui";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
