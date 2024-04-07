@@ -47,8 +47,8 @@ export const authOptions: NextAuthOptions = {
                 if (!passwordMatch) {
                     throw new Error("Incorrect credentials")
                 }
-                console.log("test")
-                console.log(user)
+                // console.log("test")
+                // console.log(user)
                 return user
             }
         })
@@ -59,7 +59,7 @@ export const authOptions: NextAuthOptions = {
     },
     callbacks: {
         session({session, token, user}) {
-            console.log("test1")
+            // console.log("test1")
             if (token) {
                 session.user = session.user || {}
                 if (token.sub) {
@@ -70,7 +70,7 @@ export const authOptions: NextAuthOptions = {
                 session.user.id = user.id
             }
 
-            console.log(token, session, user)
+            // console.log(token, session, user)
             return session
         },
         // session: async ({session, user}) => {
