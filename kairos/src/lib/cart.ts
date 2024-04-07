@@ -119,7 +119,7 @@ export async function mergeAnonCartIntoUserCart(userId: string) {
                             }))
                         }
                     }
-                }
+                },
             })
         } else {
             await tx.cart.create({
