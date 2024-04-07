@@ -6,7 +6,7 @@ import { NextAuthOptions } from "next-auth"
 import { Adapter } from "next-auth/adapters"
 import NextAuth from "next-auth/next"
 import CredentialsProvider from "next-auth/providers/credentials"
-import GoogleProvider from "next-auth/providers/google"
+// import GoogleProvider from "next-auth/providers/google"
 import bcrypt from "bcrypt"
 
 export const authOptions: NextAuthOptions = {
