@@ -51,7 +51,7 @@ model Account {
   userId            String  @db.ObjectId
   type              String
   provider          String
-  providerAccountId String
+  providerAccountId String  @map("provider_account_id")
   refresh_token     String? @db.String
   access_token      String? @db.String
   expires_at        Int?
@@ -59,6 +59,7 @@ model Account {
   scope             String?
   id_token          String? @db.String
   session_state     String?
+  password          String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -81,7 +82,7 @@ model User {
   email         String    @unique
   emailVerified DateTime? @map("email_verified")
   image         String?
-  password      String
+  password      String?
   accounts      Account[]
   sessions      Session[]
   Cart          Cart[]

@@ -4,6 +4,7 @@ import FormSubmitButton from "@/components/FormSubmitButton"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useState, FormEvent } from "react"
+import { FcGoogle } from "react-icons/fc";
 
 export default function LoginForm() {
 
@@ -53,6 +54,18 @@ export default function LoginForm() {
                         // eslint-disable-next-line react/no-unescaped-entities
                         >Let's Go !</FormSubmitButton>
                     </form>
+                    
+                    <div className="divider my-3"></div>
+
+                    <button
+                        onClick={() => signIn("google")}
+                        className="btn btn-block"
+                        disabled={true}
+                    >
+                        <FcGoogle />
+                        Connect with Google
+                    </button>
+                    <p className="text-xs text-gray-500">Not available yet</p>
             </div>
         // </div>
     )

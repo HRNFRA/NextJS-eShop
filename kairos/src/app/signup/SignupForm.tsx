@@ -64,6 +64,13 @@ export default function SignupForm() {
                     >Let's Go !</FormSubmitButton>
 
                 </form>
+                <p className="text-center">
+                    Already have an account?{" "}
+                    <a href="/login" className="link">
+                        Log in
+                    </a>
+                </p>
+
             </div>
         // </main>
     )

@@ -12,10 +12,10 @@ import bcrypt from "bcrypt"
 export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma) as Adapter,
     providers: [
-        GoogleProvider({
-            clientId: env.GOOGLE_CLIENT_ID,
-            clientSecret: env.GOOGLE_CLIENT_SECRET,
-        }),
+        // GoogleProvider({
+        //     clientId: env.GOOGLE_CLIENT_ID,
+        //     clientSecret: env.GOOGLE_CLIENT_SECRET,
+        // }), => Mofify the URI for production environment
         CredentialsProvider({
             name: "credentials",
             credentials: {
@@ -55,24 +55,37 @@ export const authOptions: NextAuthOptions = {
     ],
     secret: env.NEXTAUTH_SECRET,
     session: {
-        strategy: "jwt",
+        strategy: "jwt", // Use JWTs for session tokens
     },
     callbacks: {
-        session({session, token}) {
+        session({session, token, user}) {
             console.log("test1")
             if (token) {
                 session.user = session.user || {}
                 if (token.sub) {
-                    session.user.id = token.sub
+                    session.user.id = token.sub || session.user.id
                 }
-                session.user.name = token.email
+                session.user.name = token.email || session.user.name
+            } else {
+                session.user.id = user.id
             }
-            console.log(token, session)
+
+            console.log(token, session, user)
             return session
         },
+        // session: async ({session, user}) => {
+        //     session.user.id = user.id
+        //     return Promise.resolve(session)
+        // },
+        // jwt: async ({token, user}) => {
+        //     if (user) {
+        //         token.id = user.id
+        //     }
+        //     return Promise.resolve(token)
+        // },
     },
     pages: {
-        signIn: "/login",
+        signIn: "/",
     },
     events: {
         async signIn({user}) {

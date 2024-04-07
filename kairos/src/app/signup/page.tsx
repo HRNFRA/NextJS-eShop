@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth"
 import { redirect } from "next/navigation"
 import SignupForm from "./SignupForm"
 
+
 export default async function SignUpPage() {
     
     const session = await getServerSession()
@@ -13,6 +14,6 @@ export default async function SignUpPage() {
     }
 
     return (
-        <SignupForm />
+            <SignupForm />
     )
 }
